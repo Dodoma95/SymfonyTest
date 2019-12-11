@@ -1,0 +1,11 @@
+{
+  "name": "first_app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dodoma95 <maillard.dorian60@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1"
+  }
+}

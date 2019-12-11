@@ -1,0 +1,41 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <h1>Bonne après midi {{ name }}</h1>
+    <ul>
+        {% for item in fruitList %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Le premier élément : {{ fruitList[0] }}</p>
+    <p>Il y a {{ fruitList | length }} fruits</p>
+    <p>{{ 5 + 8 }}</p>
+
+    <div class="container">
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-light">Light</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+    </div>
+
+    <a href="{{ path('homepage') }}">Lien vers homepage</a>
+{% endblock %}
+
+{% block title %} Good afternoon {% endblock %}
+
+{% block stylesheet %}
+    <!-- permet de faire appel a la méthode parent et d'ajouter des styles autres-->
+    {{ parent() }}
+    <style>
+        body {
+            background-color: #80bdff;
+        }
+    </style>
+{% endblock %}
+
+
