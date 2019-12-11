@@ -30,14 +30,22 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/new")
+     * @Route("/book/new", name="book-create")
+     * @Route("/book/edit/{id}", name="book-edit")
      * @param Request $request
      * @return Response
      */
-    public function createBook(Request $request){
+    public function createOrEditBook(Request $request, $id=null){
 
         // Création du formulaire
-        $book = new Book();
+        if($id == null){
+            $book = new Book();
+        } else {
+            $book = $this   ->getDoctrine()
+                            ->getRepository(Book::class)
+                            ->find($id);
+        }
+
         $form = $this->createForm(BookType::class, $book);
 
         //recupere les données postées et l'injecte dans le formulaire

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +19,7 @@ class Publisher
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\Column(type="string", length=40, unique=true)
      */
     private $name;
 
@@ -27,9 +29,21 @@ class Publisher
     private $email;
 
     /**
+     * ArrayCollection est un tableau d'objet ici book
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="publisher")
+     * @var ArrayCollection
+     */
+    private $books;
+
+    /**
      * @ORM\Column(type="string", length=180)
      */
     private $website;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +82,37 @@ class Publisher
     public function setWebsite(string $website): self
     {
         $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Book[]
+     */
+    public function getBooks(): Collection
+    {
+        return $this->books;
+    }
+
+    public function addBook(Book $book): self
+    {
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->setPublisher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Book $book): self
+    {
+        if ($this->books->contains($book)) {
+            $this->books->removeElement($book);
+            // set the owning side to null (unless already changed)
+            if ($book->getPublisher() === $this) {
+                $book->setPublisher(null);
+            }
+        }
 
         return $this;
     }

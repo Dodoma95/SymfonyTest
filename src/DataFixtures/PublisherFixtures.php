@@ -37,6 +37,8 @@ class PublisherFixtures extends Fixture
     private function createPublisher($name, $email, $website) {
         $publisher = new Publisher();
         $publisher->setName($name)->setEmail($email)->setWebsite($website);
+        //addReference permet de faire le lien avec la FK située dans la table book
+        $this->addReference("publisher_$name", $publisher);
         return $publisher;
     }
 }

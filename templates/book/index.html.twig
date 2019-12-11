@@ -23,7 +23,7 @@
         <div class="row justify-content-end mb-2 mt-2">
 
             <div class="col text-right">
-                <a href="{{ path('app_book_createbook') }}" class="btn btn-primary">
+                <a href="{{ path('book-create') }}" class="btn btn-primary">
                     Nouveau livre
                 </a>
             </div>
@@ -37,6 +37,7 @@
                 <th scope="col">Author</th>
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
+                <th scope="col">Publisher Name</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -47,9 +48,14 @@
                     <td>{{ book.author }}</td>
                     <td>{{ book.title }}</td>
                     <td>{{ book.price }}</td>
+                    <td>{{ book.publisher.name }}</td>
                     <td>
                         <a href="{{ path('book-delete', {'id': book.id}) }}">
                             Delete
+                        </a>
+                        |
+                        <a href="{{ path('book-edit', {'id': book.id}) }}">
+                            Edit
                         </a>
                     </td>
                 </tr>
